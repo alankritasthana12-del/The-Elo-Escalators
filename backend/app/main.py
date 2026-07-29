@@ -8,7 +8,7 @@ from app.config.settings import settings
 from app.database.database import engine, Base
 from app.ai.matcher import load_faiss_index
 
-from app.api import lost, found, search, matches, dashboard, claim
+from app.api import lost, found, search, matches, dashboard, claim, items
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -65,6 +65,7 @@ app.include_router(search.router)
 app.include_router(matches.router)
 app.include_router(dashboard.router)
 app.include_router(claim.router)
+app.include_router(items.router)
 
 @app.get("/health")
 async def health_check():

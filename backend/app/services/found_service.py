@@ -52,6 +52,10 @@ async def process_found_item(db: Session, item: FoundItemCreate, image: UploadFi
     db.commit()
     db.refresh(db_item)
     
+    # Add to FAISS Index with offset
+    from app.ai.matcher import add_to_index
+    add_to_index(db_item.id + 1000000, embedding)
+    
     # Search FAISS
     indices, distances = search_index(embedding, top_k=5)
     

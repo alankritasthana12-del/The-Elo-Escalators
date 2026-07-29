@@ -50,7 +50,7 @@ export default function ConfidenceScore({ score, size = 64 }) {
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className={`text-base font-bold ${colorClass.split(' ')[0]}`}>{score}%</span>
+          <span className={`text-base font-bold ${colorClass.split(' ')[0]}`}>{Math.round(score)}%</span>
         </div>
       </div>
       <span className={`text-xs font-medium ${colorClass.split(' ')[0]}`}>{label} match</span>

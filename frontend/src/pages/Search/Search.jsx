@@ -117,22 +117,39 @@ export default function Search() {
                     to={`/item/${item.id}`}
                     className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 bg-surface border border-border rounded-2xl p-4 sm:p-5 hover:shadow-sm transition-shadow"
                   >
-                    <div className="flex-grow min-w-0">
-                      <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                        <h3 className="font-semibold text-text text-sm">{item.title}</h3>
-                        <Badge variant={item.type === 'lost' ? 'lost' : 'found'}>
-                          {item.type === 'lost' ? 'Lost' : 'Found'}
-                        </Badge>
-                      </div>
-                      {item.description && (
-                        <p className="text-xs text-text-secondary mb-2 line-clamp-2">{item.description}</p>
+                    <div className="flex gap-4 items-center flex-grow min-w-0">
+                      {item.image ? (
+                        <img src={item.image} alt={item.title} className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-xl shrink-0 border border-border" />
+                      ) : (
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-border-light rounded-xl shrink-0 flex items-center justify-center border border-border">
+                          <SearchIcon className="w-6 h-6 text-text-tertiary" />
+                        </div>
                       )}
-                      <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-text-tertiary">
-                        <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {item.location}</span>
-                        <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {item.date}</span>
+                      <div className="flex-grow min-w-0">
+                        <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                          <h3 className="font-semibold text-text text-sm">{item.title}</h3>
+                          <Badge variant={item.type === 'lost' ? 'lost' : 'found'}>
+                            {item.type === 'lost' ? 'Lost' : 'Found'}
+                          </Badge>
+                        </div>
+                        {item.description && (
+                          <p className="text-xs text-text-secondary mb-2 line-clamp-2">{item.description}</p>
+                        )}
+                        <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-text-tertiary">
+                          <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {item.location}</span>
+                          <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {item.date}</span>
+                        </div>
                       </div>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-text-tertiary shrink-0 hidden sm:block" />
+                    
+                    <div className="shrink-0 flex items-center ml-2 hidden sm:flex">
+                      <Button size="sm" variant="secondary" onClick={(e) => {
+                        e.preventDefault();
+                        window.location.href = `/claim/${item.id}`;
+                      }}>
+                        {item.type === 'lost' ? 'I found this' : 'Claim this'}
+                      </Button>
+                    </div>
                   </Link>
                 </motion.div>
               ))}

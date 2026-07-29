@@ -16,14 +16,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  // Mock user data for personalized experience
-  const user = {
-    name: 'Alex',
-    myLost: 1,
-    myFound: 2,
-    myMatches: 2,
-    myRecovered: 1,
-  };
+  // No user auth yet, using global metrics
 
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -67,10 +60,10 @@ export default function Dashboard() {
       <div className="mb-8 sm:mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-text mb-1">
-            {getGreeting()}, {user.name}
+            {getGreeting()}, Welcome to Lost & Found
           </h1>
           <p className="text-sm text-text-secondary">
-            You have <span className="font-semibold text-primary">{user.myMatches} new AI match suggestions</span> waiting for review.
+            Here is the global activity overview and recent reports.
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -132,10 +125,10 @@ export default function Dashboard() {
           animate={{ opacity: 1 }}
           className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8"
         >
-          <StatCard label="My Lost Reports" value={user.myLost} icon={Search} />
-          <StatCard label="My Found Reports" value={user.myFound} icon={PlusCircle} />
-          <StatCard label="My Matches" value={user.myMatches} icon={Cpu} />
-          <StatCard label="Recovered" value={user.myRecovered} icon={CheckCircle} accent />
+          <StatCard label="Total Reports" value={data.totalReports} icon={Search} />
+          <StatCard label="Pending" value={data.pending} icon={Clock} />
+          <StatCard label="AI Matches" value={data.aiMatches} icon={Cpu} />
+          <StatCard label="Recovered" value={data.recovered} icon={CheckCircle} accent />
         </motion.div>
       )}
 
@@ -147,7 +140,7 @@ export default function Dashboard() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="lg:col-span-2 bg-surface border border-border rounded-2xl p-4 sm:p-5"
+            className="lg:col-span-3 bg-surface border border-border rounded-2xl p-4 sm:p-5"
           >
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-semibold text-text">Recent Activity</h3>
@@ -181,32 +174,6 @@ export default function Dashboard() {
                   </div>
                 </div>
               ))}
-            </div>
-          </motion.div>
-
-          {/* Featured AI Match */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15 }}
-            className="bg-surface border border-border rounded-2xl p-4 sm:p-5 flex flex-col"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-semibold text-text flex items-center gap-2">
-                <Cpu className="w-4 h-4 text-primary" /> Top AI Match
-              </h3>
-            </div>
-            
-            <div className="flex-grow flex flex-col justify-center bg-primary-light/30 rounded-xl p-4 border border-primary-light">
-              <div className="flex justify-between items-start mb-3">
-                <Badge variant="primary">92% Match</Badge>
-                <span className="text-xs text-text-tertiary">Just now</span>
-              </div>
-              <p className="text-sm font-medium text-text mb-1">Black Casio Calculator</p>
-              <p className="text-xs text-text-secondary mb-4 line-clamp-2">Found matching brand and color in Library 2nd Floor.</p>
-              <Link to="/matches" className="mt-auto w-full text-center py-2 bg-surface dark:bg-surface border border-border rounded-lg text-sm font-medium text-text hover:bg-border-light transition-colors">
-                Review Match
-              </Link>
             </div>
           </motion.div>
         </div>

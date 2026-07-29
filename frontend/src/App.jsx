@@ -2,8 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home/Home';
-import Login from './pages/Auth/Login';
-import SignUp from './pages/Auth/SignUp';
 import ReportLost from './pages/ReportLost/ReportLost';
 import ReportFound from './pages/ReportFound/ReportFound';
 import Search from './pages/Search/Search';
@@ -33,8 +31,6 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<SignUp />} />
           <Route path="report-lost" element={<ReportLost />} />
           <Route path="report-found" element={<ReportFound />} />
           <Route path="search" element={<Search />} />

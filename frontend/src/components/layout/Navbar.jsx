@@ -48,23 +48,8 @@ export default function Navbar() {
 
           {/* Right: Desktop Actions & Mobile Hamburger */}
           <div className="flex items-center gap-2 sm:gap-4">
-            <div className="hidden md:flex items-center gap-3 border-r border-border pr-4 mr-1">
+            <div className="hidden md:flex items-center pr-4">
               <ThemeToggle />
-            </div>
-            
-            <div className="hidden md:flex items-center gap-2">
-              <Link 
-                to="/login" 
-                className="px-4 py-2 text-sm font-medium text-text hover:bg-border-light rounded-xl transition-colors"
-              >
-                Log In
-              </Link>
-              <Link 
-                to="/signup" 
-                className="px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-primary-dark rounded-xl transition-colors shadow-sm"
-              >
-                Sign Up
-              </Link>
             </div>
 
             {/* Mobile menu button */}

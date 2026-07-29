@@ -28,23 +28,49 @@ def get_dashboard_analytics(db: Session) -> DashboardResponse:
     
     recovery_rate = (recovered_items / total_lost * 100) if total_lost > 0 else 0.0
     
-    # Recent reports
+    # Recent reports (mock some additional fields for frontend compatibility)
     recent_lost = db.query(LostItem).order_by(LostItem.created_at.desc()).limit(5).all()
     recent_reports = [
-        {"id": item.id, "title": item.title, "type": "lost", "date": item.date}
+        {
+            "id": f"lost-{item.id}", 
+            "title": item.title, 
+            "type": "lost", 
+            "status": "searching", 
+            "location": item.location, 
+            "date": item.date
+        }
         for item in recent_lost
+    ]
+    
+    # Mock data for charts
+    chartData = [
+        {"name": "Mon", "lost": 5, "found": 3, "recovered": 1},
+        {"name": "Tue", "lost": 8, "found": 4, "recovered": 2},
+        {"name": "Wed", "lost": 3, "found": 6, "recovered": 3},
+        {"name": "Thu", "lost": 7, "found": 5, "recovered": 2},
+        {"name": "Fri", "lost": 6, "found": 8, "recovered": 4},
+        {"name": "Sat", "lost": 2, "found": 3, "recovered": 1},
+        {"name": "Sun", "lost": 1, "found": 2, "recovered": 1},
+    ]
+    
+    categoryData = [
+        {"name": "Electronics", "value": 15},
+        {"name": "Accessories", "value": 8},
+        {"name": "Documents", "value": 5},
+        {"name": "Other", "value": 3},
     ]
     
     recent_matches = get_latest_matches(db, limit=5)
     
     return DashboardResponse(
-        total_reports=total_reports,
-        recovered_items=recovered_items,
-        pending_items=pending_items,
-        ai_matches=ai_matches,
-        most_lost_category=most_lost_category,
-        most_lost_location=most_lost_location,
-        recovery_rate=recovery_rate,
-        recent_reports=recent_reports,
-        recent_matches=recent_matches
+        totalReports=total_reports,
+        recovered=recovered_items,
+        pending=pending_items,
+        aiMatches=ai_matches,
+        topCategory=most_lost_category,
+        topLocation=most_lost_location,
+        recoveryRate=recovery_rate,
+        recentReports=recent_reports,
+        chartData=chartData,
+        categoryData=categoryData
     )

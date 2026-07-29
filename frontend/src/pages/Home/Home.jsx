@@ -39,7 +39,7 @@ export default function Home() {
             transition={{ duration: 0.4, delay: 0.1 }}
             className="text-base sm:text-lg text-text-secondary mb-8 sm:mb-10 max-w-lg leading-relaxed"
           >
-            Create an account to report lost or found items, receive intelligent match suggestions, and manage your recovery journey from one place.
+            Report lost or found items, receive intelligent match suggestions, and manage your recovery journey from one place.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -48,16 +48,16 @@ export default function Home() {
             className="flex flex-col sm:flex-row gap-3"
           >
             <Link
-              to="/signup"
+              to="/report-lost"
               className="inline-flex items-center justify-center gap-2 bg-primary text-white font-medium rounded-xl px-6 py-3 text-sm hover:bg-primary-dark transition-colors active:scale-[0.98]"
             >
-              Create Account
+              Report Lost
             </Link>
             <Link
-              to="/login"
+              to="/report-found"
               className="inline-flex items-center justify-center gap-2 bg-surface text-text border border-border font-medium rounded-xl px-6 py-3 text-sm hover:bg-border-light transition-colors active:scale-[0.98]"
             >
-              Log In
+              Report Found
             </Link>
           </motion.div>
           <motion.p
@@ -187,34 +187,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== STATS ===== */}
-      <section className="border-t border-b border-border bg-surface">
-        <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 py-12 sm:py-16">
-          <p className="text-xs font-medium text-text-tertiary uppercase tracking-wider mb-6 text-center">
-            Platform Activity (Demo Data)
-          </p>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-center">
-            {[
-              { value: '128', label: 'Items Reported' },
-              { value: '46', label: 'Items Recovered' },
-              { value: '87%', label: 'Match Accuracy' },
-              { value: '12', label: 'Active AI Matches' },
-            ].map((stat, i) => (
-              <motion.div
-                key={i}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeIn}
-              >
-                <p className="text-2xl sm:text-3xl font-extrabold text-text">{stat.value}</p>
-                <p className="text-xs sm:text-sm text-text-secondary mt-1">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* ===== CTA ===== */}
       <section className="max-w-6xl mx-auto w-full px-4 sm:px-6 py-16 sm:py-20 text-center">

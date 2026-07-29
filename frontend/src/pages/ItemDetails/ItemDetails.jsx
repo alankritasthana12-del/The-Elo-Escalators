@@ -141,9 +141,9 @@ export default function ItemDetails() {
                 </div>
               )}
               {item.aiAnalysis.visibleText && (
-                <div>
-                  <dt className="text-xs text-text-tertiary">Visible Text</dt>
-                  <dd className="text-sm font-medium text-text">{item.aiAnalysis.visibleText}</dd>
+                <div className="sm:col-span-2">
+                  <dt className="text-xs text-text-tertiary mb-1">Visible Text (OCR)</dt>
+                  <dd className="text-xs font-mono text-text-secondary bg-surface border border-border rounded-lg p-3 max-h-32 overflow-y-auto whitespace-pre-wrap">{item.aiAnalysis.visibleText}</dd>
                 </div>
               )}
               {item.aiAnalysis.additionalNotes && (
@@ -161,6 +161,14 @@ export default function ItemDetails() {
           <Link to={`/claim/${item.id}`}>
             <Button size="lg" className="w-full sm:w-auto">
               This is mine — Verify & Claim
+            </Button>
+          </Link>
+        )}
+        
+        {item.type === 'lost' && item.status !== 'recovered' && item.status !== 'claimed' && (
+          <Link to={`/claim/${item.id}`}>
+            <Button size="lg" className="w-full sm:w-auto">
+              I found this — Verify & Connect
             </Button>
           </Link>
         )}

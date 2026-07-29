@@ -8,5 +8,5 @@ router = APIRouter(prefix="/api/claim", tags=["Claims"])
 
 @router.post("", response_model=ClaimResponse)
 def submit_claim(claim: ClaimCreate, db: Session = Depends(get_db)):
-    create_claim(db, claim)
-    return ClaimResponse(success=True, status="Claim submitted successfully")
+    db_claim = create_claim(db, claim)
+    return ClaimResponse(success=True, claimId=f"CLM-{db_claim.id}")

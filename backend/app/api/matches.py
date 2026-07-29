@@ -7,6 +7,9 @@ from app.services.match_service import get_latest_matches
 
 router = APIRouter(prefix="/api/matches", tags=["Matches"])
 
-@router.get("", response_model=List[MatchResponse])
+from typing import List, Dict, Any
+
+@router.get("", response_model=Dict[str, List[MatchResponse]])
 def get_matches(db: Session = Depends(get_db)):
-    return get_latest_matches(db)
+    matches = get_latest_matches(db)
+    return {"matches": matches}

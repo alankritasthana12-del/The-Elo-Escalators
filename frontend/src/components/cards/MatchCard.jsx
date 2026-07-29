@@ -29,14 +29,24 @@ export default function MatchCard({ match, index = 0 }) {
       {/* Items comparison */}
       <div className="p-4 sm:p-5 space-y-4">
         {/* Lost item */}
-        <div>
-          <div className="flex items-center gap-1.5 mb-1.5">
-            <Badge variant="lost">Lost</Badge>
-          </div>
-          <h3 className="font-semibold text-text text-sm sm:text-base mb-1">{lostItem.title}</h3>
-          <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-text-secondary">
-            <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {lostItem.location}</span>
-            <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {lostItem.date}</span>
+        {/* Lost item */}
+        <div className="flex gap-4 items-center">
+          {lostItem.image ? (
+            <img src={lostItem.image} alt={lostItem.title} className="w-16 h-16 object-cover rounded-xl shrink-0 border border-border" />
+          ) : (
+            <div className="w-16 h-16 bg-border-light rounded-xl flex items-center justify-center shrink-0 border border-border">
+               <span className="text-text-tertiary text-[10px] uppercase font-bold">No Img</span>
+            </div>
+          )}
+          <div className="flex-grow min-w-0">
+            <div className="flex items-center gap-1.5 mb-1.5">
+              <Badge variant="lost">Lost</Badge>
+            </div>
+            <h3 className="font-semibold text-text text-sm sm:text-base mb-1 truncate">{lostItem.title}</h3>
+            <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-text-secondary">
+              <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {lostItem.location}</span>
+              <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {lostItem.date}</span>
+            </div>
           </div>
         </div>
 
@@ -48,14 +58,24 @@ export default function MatchCard({ match, index = 0 }) {
         </div>
 
         {/* Found item */}
-        <div>
-          <div className="flex items-center gap-1.5 mb-1.5">
-            <Badge variant="found">Found</Badge>
-          </div>
-          <h3 className="font-semibold text-text text-sm sm:text-base mb-1">{foundItem.title}</h3>
-          <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-text-secondary">
-            <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {foundItem.location}</span>
-            <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {foundItem.date}</span>
+        {/* Found item */}
+        <div className="flex gap-4 items-center">
+          {foundItem.image ? (
+            <img src={foundItem.image} alt={foundItem.title} className="w-16 h-16 object-cover rounded-xl shrink-0 border border-border" />
+          ) : (
+            <div className="w-16 h-16 bg-border-light rounded-xl flex items-center justify-center shrink-0 border border-border">
+               <span className="text-text-tertiary text-[10px] uppercase font-bold">No Img</span>
+            </div>
+          )}
+          <div className="flex-grow min-w-0">
+            <div className="flex items-center gap-1.5 mb-1.5">
+              <Badge variant="found">Found</Badge>
+            </div>
+            <h3 className="font-semibold text-text text-sm sm:text-base mb-1 truncate">{foundItem.title}</h3>
+            <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-text-secondary">
+              <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {foundItem.location}</span>
+              <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {foundItem.date}</span>
+            </div>
           </div>
         </div>
 

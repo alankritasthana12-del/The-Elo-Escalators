@@ -13,12 +13,20 @@ class MatchBase(BaseModel):
 class MatchCreate(MatchBase):
     pass
 
+class ItemSnippet(BaseModel):
+    id: str
+    title: str
+    location: str
+    date: str
+    image: Optional[str] = None
+
 class MatchResponse(BaseModel):
     id: int
-    lost_item_id: int
-    found_item_id: int
+    lostItem: ItemSnippet
+    foundItem: ItemSnippet
     confidence: float
     reasons: List[str]
+    status: str
     created_at: datetime
 
     class Config:

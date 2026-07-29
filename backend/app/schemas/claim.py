@@ -2,18 +2,16 @@ from pydantic import BaseModel
 from typing import Optional, Dict
 from datetime import datetime
 
-class ClaimBase(BaseModel):
-    match_id: int
-    claimer_name: str
-    contact: str
-    verification_answers: Dict[str, str]
-
-class ClaimCreate(ClaimBase):
-    pass
+class ClaimCreate(BaseModel):
+    itemId: str
+    verificationDetails: str
+    fullName: str
+    studentId: Optional[str] = None
+    phone: str
 
 class ClaimResponse(BaseModel):
     success: bool
-    status: str
+    claimId: str
 
 class Claim(BaseModel):
     id: int
